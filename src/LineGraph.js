@@ -47,33 +47,33 @@ const options = {
     },
 };
 
-function LineGraph({ casesType ='cases'}) {
-    const [data, setData] = useState({});
-
-    // building the chart lines
-    const buildChartData = (data, casesType = "cases") => {
-        const chartData = [];
-        let lastDataPoint;
-        for (let date in data.cases) {
-            if (lastDataPoint) {
-                const newDataPoint = {
-                    x: date,
-                    y: data[casesType][date] - lastDataPoint,
-                };
-                chartData.push(newDataPoint);
-            }
-            lastDataPoint = data[casesType][date];
+// building the chart lines
+const buildChartData = (data, casesType = "cases") => {
+    const chartData = [];
+    let lastDataPoint;
+    for (let date in data.cases) {
+        if (lastDataPoint) {
+            const newDataPoint = {
+                x: date,
+                y: data[casesType][date] - lastDataPoint,
+            };
+            chartData.push(newDataPoint);
         }
-        return chartData;
-    };
+        lastDataPoint = data[casesType][date];
+    }
+    return chartData;
+};
+
+function LineGraph({ casesType = "cases", ...props }) {
+    const [data, setData] = useState({});
 
     // request historic of all country/caseType-total of the last 120days
     useEffect(() => {
         const fetchData = async () => {
-            fetch("https:disease.sh/v3/covid-19/historical/all?lastdays=120")
+            fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
                 .then((response) => response.json())
                 .then((data) => {
-                    const chartData = buildChartData(data);
+                    const chartData = buildChartData(data, casesType);
                     setData(chartData);
                 });
         };
@@ -82,8 +82,7 @@ function LineGraph({ casesType ='cases'}) {
     }, [casesType]);
 
     return (
-        <div>
-            <h1>im a graph</h1>
+        <div className={props.className}>
             {/* do nothing before we finished to fetch the data */}
             {data?.length > 0 && (
                 <Line
