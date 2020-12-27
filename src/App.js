@@ -90,6 +90,8 @@ function App() {
         octoColor="#fff"
         size={80}
         direction="right"
+        target="_blank"
+        rel="noreferrer"
       />
       <div className="app__left">
         <div className="app__header">
