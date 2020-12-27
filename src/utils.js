@@ -36,10 +36,11 @@ export const prettyPrintStat = (stat) =>
 // DRAW circles on the map with interactive tooltip
 export const showDataOnMap = (data, casesType = "caseType") =>
   data.map((country) => {
-      let circleId= country.countryInfo._id
+    let circleId = country.countryInfo._id;
     if (circleId === null) {
-        circleId=country.country
+      circleId = country.country;
     }
+    
     return (
       <Circle
         key={circleId}
