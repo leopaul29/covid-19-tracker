@@ -112,6 +112,7 @@ function App() {
           </FormControl>
         </div>
 
+        <h3 className="header__today">Today</h3>
         <div className="app__stats">
           <InfoBox
             isRed

@@ -27,6 +27,12 @@ body {
 .app__header > h1 {
   color: #fc3c3c;
   font-size: 2rem;
+  padding-left: 12px;
+}
+
+.header__today{
+  padding-bottom: 12px;
+  padding-left: 12px;
 }
 
 .app__left {
